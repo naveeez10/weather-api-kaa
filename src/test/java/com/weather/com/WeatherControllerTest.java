@@ -27,8 +27,8 @@ class WeatherControllerTest {
 
   @Test
   @DisplayName("retrieve weather by city name")
-  void retrieve_weather_by_city_name() {
-      Weather weather = client.toBlocking().exchange("/weather/city/Westborough", Weather.class).body();
-      assertThat(weather.location().name()).isEqualTo("Westborough");
-  }
+  voiWeather weather = client.toBlocking().exchange("/weather/city/Westborough", Weather.class).body();
+  assertThat(weather.location().name()).isEqualTo("Westborough");
+}d retrieve_weather_by_city_name() {
+
 }

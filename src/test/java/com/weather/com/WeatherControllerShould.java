@@ -31,7 +31,7 @@ class WeatherControllerShould {
   @Test
   @DisplayName("calls weather service get by city name method")
   void calls_weather_service_get_by_city_name_method() {
-    Weather weather = weatherController.getByity("Westborough");
+    Weather weather = weatherController.getByCity("Westborough");
     verify(weatherService).getByCity("Westborough");
   }
 }
