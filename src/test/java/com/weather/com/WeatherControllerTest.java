@@ -2,6 +2,7 @@ package com.weather.com;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.micronaut.http.client.annotation.*;
@@ -15,14 +16,10 @@ public class WeatherControllerTest {
     @Client("/")
     HttpClient client;
 
-    @Test
-    public void testIndex() throws Exception {
-        assertEquals(HttpStatus.OK, client.toBlocking().exchange("/weather").status());
-    }
-    
-    @Test
-    @DisplayName("retrieve weather info by zip code")
-    void retrieve_weather_info_by_zip_code() {
-        assertEquals(HttpStatus.OK, client.toBlocking().exchange("/weather/zip/012").status());
-    } 
+  @Test
+  @DisplayName("should return weather from zip code")
+  void should_return_weather_from_zip_code() {
+    Weather weather = client.toBlocking().exchange("/weather/zip/01581", Weather.class).body();
+    Assertions.assertThat(weather.location().name()).isEqualTo("Westborough");
+  }
 }

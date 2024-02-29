@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -21,10 +23,9 @@ class WeatherControllerShould {
   }
 
   @Test
-  @DisplayName("calls_weather_service_get_by_zip_method")
-  void calls_weather_service_get_by_zip_method() {
-    Weather weather = weatherController.getByZip("0123");
-    verify(weatherService).getByZip("0123");
+  @DisplayName("should return weather with zip code")
+  void should_return_weather_with_zip_code() {
+    weatherController.getWeather("01581");
+    verify(weatherService).getWeatherByZip("01581");
   }
-
 }

@@ -1,8 +1,16 @@
 package com.weather.com;
 
-public class WeatherService {
+import jakarta.inject.Singleton;
 
-    public Weather getByZip(String zip) {
-        throw new UnsupportedOperationException();
-    }
+@Singleton
+public class WeatherService {
+  WeatherApi weatherApi;
+
+  public WeatherService(WeatherApi weatherApi) {
+    this.weatherApi = weatherApi;
+  }
+
+  public Weather getWeatherByZip(String zip) {
+      return weatherApi.getWeather(zip);
+  }
 }
