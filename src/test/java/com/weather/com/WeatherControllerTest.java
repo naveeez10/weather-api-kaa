@@ -1,28 +1,34 @@
 package com.weather.com;
-import io.micronaut.http.HttpStatus;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.annotation.*;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import io.micronaut.http.client.annotation.*;
-import jakarta.inject.Inject;
-import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest
-public class WeatherControllerTest {
+class WeatherControllerTest {
 
-    @Inject
-    @Client("/")
-    HttpClient client;
+  @Inject
+  @Client("/")
+  HttpClient client;
 
-    @Test
-    public void testIndex() throws Exception {
-        assertEquals(HttpStatus.OK, client.toBlocking().exchange("/weather").status());
-    }
-    
-    @Test
-    @DisplayName("retrieve weather info by zip code")
-    void retrieve_weather_info_by_zip_code() {
-        assertEquals(HttpStatus.OK, client.toBlocking().exchange("/weather/zip/012").status());
-    } 
+  @Test
+  @DisplayName("retrieve weather by zip code")
+  void retrieve_weather_by_zip_code() {
+    Weather weather = client.toBlocking().exchange("/weather/zip/01581", Weather.class).body();
+    assertThat(weather.location().name()).isEqualTo("Westborough");
+  }
+
+
+  @Test
+  @DisplayName("retrieve weather by city name")
+  void retrieve_weather_by_city_name() {
+      Weather weather = client.toBlocking().exchange("/weather/city/Westborough", Weather.class).body();
+      assertThat(weather.location().name()).isEqualTo("Westborough");
+  }
 }

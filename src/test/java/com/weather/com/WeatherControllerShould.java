@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,4 +28,10 @@ class WeatherControllerShould {
     verify(weatherService).getByZip("0123");
   }
 
+  @Test
+  @DisplayName("calls weather service get by city name method")
+  void calls_weather_service_get_by_city_name_method() {
+    Weather weather = weatherController.getByity("Westborough");
+    verify(weatherService).getByCity("Westborough");
+  }
 }
