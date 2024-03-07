@@ -22,8 +22,8 @@ class WeatherServiceShould {
   }
 
   @Test
-  @DisplayName("should call weather client to retrieve realtime weather data from the api")
-  void should_call_weather_client_to_retrieve_realtime_weather_data_from_the_api() {
+  @DisplayName("should call weather client to retrieve realtime weather data from the api through zip code")
+  void should_call_weather_client_to_retrieve_realtime_weather_data_from_the_api_through_zip_code() {
     weatherService.getWeatherByZip("01581");
     verify(weatherApi).getWeather("01581");
   }
