@@ -25,7 +25,7 @@ class WeatherControllerShould {
   @Test
   @DisplayName("should return weather with zip code")
   void should_return_weather_with_zip_code() {
-    weatherController.getWeather("01581");
+    weatherController.getWeatherByZipCode("01581");
     verify(weatherService).getWeatherByZip("01581");
   }
 }

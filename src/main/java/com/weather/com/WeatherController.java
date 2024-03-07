@@ -15,7 +15,7 @@ public class WeatherController {
 
   @Get("/zip/{zip}")
   @ExecuteOn(TaskExecutors.BLOCKING)
-  public Weather getWeather(String zip) {
+  public Weather getWeatherByZipCode(String zip) {
     return weatherService.getWeatherByZip(zip);
   }
 }
